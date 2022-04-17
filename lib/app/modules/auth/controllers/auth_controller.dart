@@ -65,4 +65,8 @@ class AuthController extends GetxController {
     }
   }
 
+  void toRegister() {
+    Get.offNamed(Routes.register);
+  }
+
 }
