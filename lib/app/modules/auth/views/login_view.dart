@@ -32,28 +32,43 @@ class LoginView extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    NxText(
-                      'Login',
-                      fontSize: 24,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.black,
-                      lineHeight: 1.5,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.asset(
+                          'assets/pngs/logo.png',
+                          width: 150.0,
+                          height: 100.0,
+                          fit: BoxFit.cover,
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        NxText(
+                          'Login',
+                          fontSize: 24,
+                          fontWeight: FontWeight.w800,
+                          color: Colors.black,
+                          lineHeight: 1.5,
+                        ),
+                      ],
                     ),
                     SizedBox(height: 8),
-                    NxText(
-                      'Silahkan Masuk Dengan Akun Bias Kamu',
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.black,
-                      lineHeight: 1.5,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        NxText(
+                          'Silahkan Masuk Dengan Akun Bias Kamu',
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.black,
+                          lineHeight: 1.5,
+                        ),
+                      ],
                     ),
                     SizedBox(height: 20),
-                    /*Image.asset(
-                      'assets/pngs/logo.png',
-                      width: 600.0,
-                      height: 240.0,
-                      fit: BoxFit.cover,
-                    ),*/
                     NxText.lead1(
                       'Username',
                       color: Colors.black,

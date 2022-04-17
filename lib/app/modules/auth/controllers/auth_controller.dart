@@ -56,7 +56,7 @@ class AuthController extends GetxController {
         Get.offNamed(Routes.home);
       } catch (e) {
         loading.value = false;
-        print('erroe: $e');
+        print(e);
         DialogHelper.showDialogError(
           title: 'Terjadi Kesalahan',
           description: NetworkException.getErrorException(e).prefix,
