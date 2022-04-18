@@ -1,13 +1,14 @@
 import 'package:bias_user/app/modules/home/controllers/home_controller.dart';
 import 'package:bias_user/services/auth_service.dart';
 import 'package:flutter/material.dart';
+import 'package:bias_user/app/routes/app_pages.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:bias_user/helpers/general.dart';
 import 'package:bias_user/helpers/date_helper.dart';
 import 'package:bias_user/helpers/string_extension.dart';
-import 'package:bias_user/app/routes/app_pages.dart';
 import 'package:nx_flutter_ui_starter_pack/nx_flutter_ui_starter_pack.dart';
 import 'package:bias_user/resources/colors.dart';
+import 'package:get/get.dart';
 class HomeView extends GetView<HomeController> {
   const HomeView({ Key? key }) : super(key: key);
 
@@ -70,7 +71,7 @@ class HomeView extends GetView<HomeController> {
               ),
             ),
             NxBox(
-              margin: EdgeInsets.only(left: 10, right: 20.0, top : 0),
+              margin: EdgeInsets.only(left: 16, right: 20.0, top : 0),
               borderRadius: 8,
               color: Colors.transparent,
               child: Column(
@@ -85,79 +86,78 @@ class HomeView extends GetView<HomeController> {
                 )]
               )
             ),
-            ListView.separated(
-                shrinkWrap: true,
-                physics: BouncingScrollPhysics(),
-                padding: EdgeInsets.zero,
-                itemCount: controller.dataList.value.length,
-                separatorBuilder: (contextn, index) => Divider(height: 0), 
-                itemBuilder: (contextn, index) => Padding(
-                  padding: EdgeInsets.all(16.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            NxText(
-                              controller.dataList.value[index].merchant?.name ?? '-',
-                              color: Colors.black,
-                              fontSize: 16,
-                              lineHeight: 1.5,
-                            ),
-                            SizedBox(height: 4),
-                            NxText(
-                              '${controller.dataList.value[index].note!="" ? controller.dataList.value[index].note : "Tidak Ada Catatan"}',
-                              color: controller.dataList.value[index].note!="" ? Colors.green : Colors.grey,
-                              fontSize: 12,
-                            ),
-                            SizedBox(height: 4),
-                            Row(
-                              children: [
-                                Icon(
-                                  Icons.store, 
-                                  size: 12, 
-                                  color: Colors.grey
-                                ),
-                                SizedBox(width: 4),
-                                NxText.small1(
-                                  controller.dataList.value[index].merchant?.name ?? '-',
-                                  color: Colors.grey
-                                ),
-                                SizedBox(width: 8),
-                                Icon(
-                                  Icons.article, 
-                                  size: 12, 
-                                  color: Colors.grey
-                                ),
-                                SizedBox(width: 4),
-                                NxText.small1(
-                                  controller.dataList.value[index].transactionCode ?? '-',
-                                  color: Colors.grey
-                                ),
-                              ],
-                            )
-                          ],
-                        ),
-                      ),
-                      Column(
+            Obx(()  =>  ListView.separated(
+              shrinkWrap: true,
+              physics: BouncingScrollPhysics(),
+              padding: EdgeInsets.zero,
+              itemCount: controller.dataList.value.length,
+              separatorBuilder: (contextn, index) => Divider(height: 0), 
+              itemBuilder: (contextn, index) => Padding(
+                padding: EdgeInsets.all(20.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          NxText.lead1(
-                            rupiah(controller.dataList.value[index].totalBuy),
-                            color: Colors.green,
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.store, 
+                                size: 20, 
+                                color: Colors.red
+                              ),
+                              SizedBox(width: 4),
+                              NxText(
+                                controller.dataList.value[index].merchant?.name ?? '-',
+                                color: Colors.black,
+                                fontSize: 16,
+                                lineHeight: 1.5,
+                              ),
+                            ],
                           ),
-                          SizedBox(width: 4),
-                          NxText.small1(
-                            DateHelper(date: controller.dataList.value[index].createdAt).format7() ?? '',
-                            color: Colors.grey
+                          SizedBox(height: 4),
+                          NxText(
+                            '${controller.dataList.value[index].note!="" ? controller.dataList.value[index].note : "Tidak Ada Catatan"}',
+                            color: controller.dataList.value[index].note!="" ? Colors.green : Colors.grey,
+                            fontSize: 12,
                           ),
+                          SizedBox(height: 4),
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.article, 
+                                size: 12, 
+                                color: Colors.grey
+                              ),
+                              SizedBox(width: 4),
+                              NxText.small1(
+                                controller.dataList.value[index].transactionCode ?? '-',
+                                color: Colors.grey
+                              ),
+                            ],
+                          )
                         ],
                       ),
-                    ],
-                  ),
-                ), 
-              ),
+                    ),
+                    Column(
+                      children: [
+                        NxText.lead1(
+                          rupiah(controller.dataList.value[index].totalBuy),
+                          color: Colors.green,
+                        ),
+                        SizedBox(width: 4),
+                        NxText.small1(
+                          DateHelper(date: controller.dataList.value[index].createdAt).format7() ?? '',
+                          color: Colors.grey
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ), 
+            )),
           ],
         ),
       ),
@@ -165,7 +165,7 @@ class HomeView extends GetView<HomeController> {
         color: Colors.white,
         padding: EdgeInsets.all(16),
         child: NxButton.primary(
-          onPressed: () => AuthService.to.logout(),
+          onPressed: () => Get.toNamed(Routes.merchant),
           child: NxText('Bayar', color: Colors.white),
         ),
       ),

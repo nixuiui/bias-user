@@ -3,7 +3,7 @@ import 'dart:convert';
 Merchant merchantFromJson(String str) => Merchant.fromJson(json.decode(str));
 
 String merchantToJson(Merchant data) => json.encode(data.toJson());
-
+List<Merchant> listMerchantFromJson(String str) => List<Merchant>.from(json.decode(str).map((x) => Merchant.fromJson(x)));
 class Merchant {
     Merchant({
         this.password,
@@ -56,6 +56,7 @@ class Merchant {
         token: json["token"],
     );
 
+  
     Map<String, dynamic> toJson() => {
         "password": password,
         "address": address,

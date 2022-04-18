@@ -15,4 +15,15 @@ class DialogHelper {
     );
   }
 
+  static showDialogSuccess({
+    String? title, String? description
+  }) {
+    Get.dialog(
+      DialogAlert.success(
+        title: title,
+        description: description,
+      ),
+    );
+  }
+
 }

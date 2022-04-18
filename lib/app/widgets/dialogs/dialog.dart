@@ -82,7 +82,7 @@ class DialogAlert extends StatelessWidget {
                 onPressed: () => Get.back(),
                 radius: 10,
                 child: Text(
-                  'Coba Lagi',
+                  'Ok',
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w600,

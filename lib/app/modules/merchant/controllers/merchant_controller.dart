@@ -1,18 +1,19 @@
-import 'package:bias_user/services/auth_service.dart';
-import 'package:get/get.dart';
-import 'package:bias_user/app/models/order.dart';
+import 'package:bias_user/app/models/merchant.dart';
+import 'package:bias_user/app/modules/merchant/repositories/merchant_repository.dart';
 import 'package:flutter/material.dart';
-import 'package:package_info/package_info.dart';
-import 'package:bias_user/app/modules/home/repositories/home_repository.dart';
-import 'package:bias_user/app/modules/home/repositories/order_repository.dart';
-class HomeController extends GetxController {
-  static HomeController get to => Get.find();
+import 'package:get/get.dart';
 
-  final _homeRepository = HomeRepository();
-  final user = AuthService.to.user;
+class MerchantController extends GetxController {
+  static MerchantController get to => Get.find();
 
-  final version = ''.obs;
-  final _orderRepository = OrderRepository();
+  @override
+  void onInit() {
+    scrollController.addListener(_onScroll);
+    loadData();
+    super.onInit();
+  }
+
+  final _merchantRepository = MerchantRepository();
 
   var page = 1;
   var limit = 20;
@@ -21,13 +22,7 @@ class HomeController extends GetxController {
   var isLoading = RxBool(false);
   final scrollController = ScrollController();
 
-  final dataList = Rx<List<Order>>([]);
-  @override
-  void onInit() async {
-    scrollController.addListener(_onScroll);
-    await loadData();
-    super.onInit();
-  }
+  final dataList = Rx<List<Merchant>>([]);
 
   void _onScroll() async {
     final maxScroll = scrollController.position.maxScrollExtent;
@@ -38,28 +33,12 @@ class HomeController extends GetxController {
       currentScroll: currentScroll
     );
   }
-  
 
-  init() async {
-    var packageInfo = await PackageInfo.fromPlatform();
-    version.value = packageInfo.version;
-    await Future.delayed(Duration(seconds: 2));
-  }
-
-  Future<void> onRefresh() async {
+  onRefresh() {
     page = 1;
-    await loadData();
-    await loadUser();
+    loadData();
   }
 
-  Future loadUser() async {
-    try {
-      user.value = await _homeRepository.getProfile();
-    } catch (e) {
-      print('error: $e');
-    }
-  }
-  
   loadDataList({
     bool refresh = false,
     bool loadMore = false,
@@ -87,13 +66,12 @@ class HomeController extends GetxController {
       if(page == 1) {
       }
       var currentData = dataList.value.map(
-        (e) => Order.fromJson(e.toJson())
+        (e) => Merchant.fromJson(e.toJson())
       ).toList();
-      final response = await _orderRepository.getList(
+      final response = await _merchantRepository.getList(
         page: page, 
         limit: limit, 
       );
-      
       if(page == 1) {
         dataList.value = response ?? [];
       } else {
@@ -117,4 +95,3 @@ class HomeController extends GetxController {
   }
 
 }
-
