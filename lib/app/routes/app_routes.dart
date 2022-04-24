@@ -11,5 +11,7 @@ abstract class Routes {
   static const register = '/register';
   static const merchant = '/merchant';
   static const payment = '/payment';
-
+  static const userSetting = '/user-setting';
+  static const userUpdatePassword = '/user-update-password';
+  static const userUpdate = '/user-update';
 }

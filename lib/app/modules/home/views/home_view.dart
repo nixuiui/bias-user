@@ -18,6 +18,30 @@ class HomeView extends GetView<HomeController> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Bias Voucher'),
+        actions: [
+          Row(
+            children: [
+              IconButton(
+                icon : Icon(Icons.assignment_ind_sharp),
+                color: AppColors.primary,
+                onPressed: () { Get.toNamed(Routes.userUpdate);},
+              ),
+              IconButton(
+                icon : Icon(Icons.key),
+                color: AppColors.primary,
+                onPressed: () { Get.toNamed(Routes.userUpdatePassword);},
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 0),
+                child: IconButton(
+                  icon : Icon(Icons.logout),
+                  color: AppColors.primary,
+                  onPressed: () { AuthService.to.logout();},
+                )
+              ),
+            ],
+          ),
+        ],
       ),
       body: RefreshIndicator(
         onRefresh: controller.onRefresh,
@@ -27,7 +51,7 @@ class HomeView extends GetView<HomeController> {
               margin: EdgeInsets.only(left: 20.0, right: 20.0, top : 10.0),
               color: Colors.transparent,
               borderRadius: 8,
-              child: Column(
+              child: Obx(() => Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                 NxText(
@@ -37,7 +61,7 @@ class HomeView extends GetView<HomeController> {
                   color: Colors.black,
                   lineHeight: 1.5,
                 )]
-              )
+              ))
             ),
             NxBox(
               borderColor: AppColors.primary,

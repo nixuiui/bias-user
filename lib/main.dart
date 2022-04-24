@@ -43,7 +43,7 @@ void main() async {
         ),
         dividerColor: Colors.grey[400],
       ),
-      title: "ERP31",
+      title: "Bias Voucher",
       initialBinding: BindingsBuilder(
         () {
           Get.put(LocalStorageService());

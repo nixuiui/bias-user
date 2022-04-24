@@ -1,6 +1,7 @@
+import 'dart:convert';
+
 import 'package:bias_user/app/models/user.dart';
 import 'package:bias_user/services/network_service.dart';
-
 class AuthRepository {
 
   var network = NetworkService.to;
@@ -22,6 +23,52 @@ class AuthRepository {
       print('response user: ${User.fromJson(response.data['data']).toJson()}');
       return User.fromJson(response.data['data']);
     } catch (e, stack) {
+      rethrow;
+    }
+  }
+
+  Future<User?> updatePassword({
+    required String password,
+    required String oldPassword,
+  }) async {
+    try {
+      var url = '/user/me/password';
+      final response = await network.patch(
+        url: url,
+        data: {
+          "password" : password,
+          "oldPassword" : oldPassword
+        }
+      );
+      return userFromJson(
+        jsonEncode(response.data['data'])
+      );
+    } catch (e) {
+      rethrow;
+    }
+  }
+  
+  Future<User?> updateUser({
+    required String fullName,
+    required String division,
+    required String phoneNumber,
+    required String username,
+  }) async {
+    try {
+      var url = '/user/me';
+      final response = await network.patch(
+        url: url,
+        data:  {
+          "fullName": fullName,
+          "division": division,
+          "phoneNumber": phoneNumber,
+          "userName": username
+        }
+      );
+      return userFromJson(
+        jsonEncode(response.data['data'])
+      );
+    } catch (e) {
       rethrow;
     }
   }
