@@ -1,7 +1,5 @@
-import 'package:bias_user/app/models/user.dart';
 import 'package:bias_user/app/modules/auth/repositories/auth_repository.dart';
 import 'package:bias_user/app/modules/home/repositories/home_repository.dart';
-import 'package:bias_user/app/routes/app_pages.dart';
 import 'package:bias_user/helpers/dialog_helper.dart';
 import 'package:bias_user/helpers/network/network_exceptions.dart';
 import 'package:bias_user/services/auth_service.dart';

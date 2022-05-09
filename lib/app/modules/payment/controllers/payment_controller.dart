@@ -1,8 +1,6 @@
 import 'package:bias_user/app/modules/payment/repositories/payment_repository.dart';
-import 'package:bias_user/app/routes/app_pages.dart';
 import 'package:bias_user/helpers/dialog_helper.dart';
 import 'package:bias_user/helpers/network/network_exceptions.dart';
-import 'package:bias_user/services/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -40,7 +38,7 @@ class PaymentController extends GetxController {
     if(isValid()) {
       try {
         loading.value = true;
-        final response = await paymentRepository.pay(
+        await paymentRepository.pay(
           totalBuy:  int.parse(totalController.text), 
           note: noteController.text, 
           merchant : params[0]

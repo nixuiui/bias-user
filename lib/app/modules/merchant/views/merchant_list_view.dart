@@ -1,9 +1,5 @@
 import 'package:bias_user/app/modules/merchant/controllers/merchant_controller.dart';
-import 'package:bias_user/helpers/date_helper.dart';
-import 'package:bias_user/helpers/general.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
-import 'package:nx_flutter_ui_starter_pack/nx_flutter_ui_starter_pack.dart';
 import 'package:bias_user/app/routes/app_pages.dart';
 import 'package:get/get.dart';
 class MerchantListView extends GetView<MerchantController> {

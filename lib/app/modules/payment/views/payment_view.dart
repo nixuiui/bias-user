@@ -1,6 +1,5 @@
 import 'package:bias_user/app/modules/payment/controllers/payment_controller.dart';
 import 'package:bias_user/resources/colors.dart';
-import 'package:bias_user/app/routes/app_pages.dart';
 import 'package:bias_user/services/config_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

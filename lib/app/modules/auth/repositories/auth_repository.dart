@@ -22,7 +22,7 @@ class AuthRepository {
       print('response: ${response.data["data"]}');
       print('response user: ${User.fromJson(response.data['data']).toJson()}');
       return User.fromJson(response.data['data']);
-    } catch (e, stack) {
+    } catch (e, _) {
       rethrow;
     }
   }
